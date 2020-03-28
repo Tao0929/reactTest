@@ -1,26 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Fragment, Component } from 'react'
+import {
+  Home,
+  OtherPage
+} from './page/index'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  constructor (props) {
+    super (props)
+    this.state = {
+        homeTitle: '我是首页',
+        otherPageTitle: '我是其他页'
+    }
+  }
+  handleChangeTitle = (sonValue, type) => {
+    // debugger
+    if (type === '1') {
+      this.setState({
+        homeTitle: sonValue
+      })
+    } else if (type === '2') {
+      this.setState({
+        otherPageTitle: sonValue
+      })
+    }
+  }
+  render () {
+    return (
+      <Fragment>
+        {/* <span>点击标题修改</span> */}
+        <Home handleChangeTitle={(sonValue, type)=>this.handleChangeTitle(sonValue, type)} title={this.state.homeTitle}></Home>
+        <OtherPage handleChangeTitle={(sonValue, type)=>this.handleChangeTitle(sonValue, type)} title={this.state.otherPageTitle}></OtherPage>
+      </Fragment>
+    );
+  }
 }
 
 export default App;
